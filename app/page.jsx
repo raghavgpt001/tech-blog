@@ -2,13 +2,13 @@
 import { Client, Databases, ID} from "appwrite";
 import Navbar from '../components/Navbar'
 import BlogPost from '../components/BlogPost'
-import {useState} from 'react'
+import {useState, useEffect } from 'react'
 
 export default function Home() {
-  const client = new Client()
   const [blogs,setBlogs] = useState([])
-
-  client
+  useEffect(()=>{
+    const client = new Client()
+    client
       .setEndpoint('https://cloud.appwrite.io/v1')
       .setProject('65c2970cc45f1f2a9530');
   
@@ -26,6 +26,8 @@ export default function Home() {
       console.log(error);
   });
 
+  },[])
+  
   function truncateHTML(htmlString, maxLength) {
     const strippedString = htmlString.replace(/<[^>]*>/g, '');
     const truncatedString = strippedString.substring(0, maxLength);

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { Client, Databases, Query} from "appwrite";
 import Navbar from '../../../components/Navbar'
 
@@ -8,7 +8,8 @@ import Navbar from '../../../components/Navbar'
 export default function Page({params}) {
   const [blog,setBlog] = useState(null)
 
-  const client = new Client()
+  useEffect(()=>{
+    const client = new Client()
   client
   .setEndpoint('https://cloud.appwrite.io/v1')
   .setProject('65c2970cc45f1f2a9530');
@@ -26,7 +27,8 @@ export default function Page({params}) {
     }, function (error) {
         console.log(error);
     });
-
+  },[])
+  
     return <>
         <Navbar/>
         <div className="container mx-auto mt-8">
